@@ -1,0 +1,111 @@
+{% extends '::base.html.twig' %}{% block title %}
+    User
+{% endblock %}
+{% block content %}
+
+	<!--  start page-heading -->
+	<div id="page-heading">
+		<h1>User</h1>
+	</div>
+	<!-- end page-heading -->
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" id="content-table">
+		{% include "AdminBundle::tableStart.html.twig" %}
+		<tr>
+			<td id="tbl-border-left"></td>
+			<td>
+			<!--  start content-table-inner ...................................................................... START -->
+			<div id="content-table-inner">
+			
+				<!--  start table-content  -->
+				
+				<div id="table-content">
+				
+					<!--  start common template for display error and success message -->
+					{% include "AdminBundle::message.html.twig" %}
+					<!--  end common template for display error and success message -->
+			
+					<div style="float:right">
+			 		<a href="{{ path('user_new') }}">
+			        	{% if app.session.get('role_name') == 'ROLE_STAFF' %}
+			            	Create new Client
+			            {% elseif app.session.get('role_name') == 'ROLE_ADMIN' %}
+			            	Create new Staff
+			            {% else %}
+			            	Create a new entry
+			            {% endif %}
+			        </a>
+			        </div>
+			        <div class="clear"></div>
+					<!--  start product-table ..................................................................................... -->
+					<form action="{{ path('changestatus') }}" method="post" id="mainform">
+					<table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+						<tr>
+							<th class="table-header-check"><input class="check_all" type="checkbox" name="check_all" id="check_all" value="chk_all" /></th>
+				            <th class="table-header-repeat line-left minwidth-1"><a href="">Username</a></th>
+				            <th class="table-header-repeat line-left"><a href="">Email</a></th>
+				            <th class="table-header-repeat line-left minwidth-1"><a href="">Name</a></th>
+				            <th class="table-header-repeat line-left"><a href="">Role</a></th>
+				            <th class="table-header-repeat line-left"><a href="">Availibity Status</a></th>
+				            <th class="table-header-repeat line-left"><a href="">Status</a></th>
+				            <th class="table-header-repeat line-left"><a href="">Options</a></th>
+							
+						</tr>
+						{% for entity in pager.getResults %}
+				        <tr>
+				        	<td><input class="checkbox" type="checkbox" name="check_boxes[]" id="check_{{ entity.id }}" value="{{ entity.id }}" /></td>
+				            <td>{{ entity.username }}</td>
+				            <td>{{ entity.email }}</td>
+				            <td>{{ entity.name }}</td>
+				            <td>{{ entity.role.values[0] is defined ?  entity.role.values[0].title : '' }}</td>
+				            <td>{{ entity.availibilityStatus }}</td>
+				            <td>{{ entity.status }}</td>
+				            <td class="options-width">
+				            	<a title="Show" href="{{ path('user_show', { 'id': entity.id }) }}">show</a> | 
+				            	<a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a> |
+				                <a onclick="return confirm('Are you sure ?');" href="{{ path('user_delete_link', { 'id': entity.id }) }}">delete</a>
+							</td>
+				        </tr>
+				    	{% else %}
+				    	<tr>
+				    		<td colspan="8">No Record!</td>
+				    	</tr>
+				    	{% endfor %}
+				    	<tr>
+				    		<td colspan="8">
+				    		
+				    		<div id="actions-box" style="float:left">
+								<select class="status_select" name="status_code" id="status_code" onchange="changeStatus(this.form, this.value);">
+						    		<option value="">Change Status</option>
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
+								</select>
+								<div class="clear"></div>
+							</div>
+							<div>
+					    		{% if pager.isPaginable %}
+								   {{ paginate(pager, 'user') }}
+								{% endif %}
+							</div>
+				    		</td>
+				    	</tr>
+					</table>
+					</form>
+					<!--  end product-table................................... --> 
+					
+				</div>
+				<!--  end content-table  -->
+			
+				
+				
+				
+				<div class="clear"></div>
+			 
+			</div>
+			<!--  end content-table-inner ............................................END  -->
+			</td>
+			<td id="tbl-border-right"></td>
+		</tr>
+		{% include "AdminBundle::tableEnd.html.twig" %}
+	</table>
+	<div class="clear">&nbsp;</div>
+{% endblock %}

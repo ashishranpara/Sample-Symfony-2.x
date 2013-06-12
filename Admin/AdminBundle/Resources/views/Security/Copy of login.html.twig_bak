@@ -1,0 +1,41 @@
+{% extends "AdminBundle::loginlayout.html.twig" %}
+{% block title %}
+    Libalaw login page
+{% endblock %}
+ 
+{% block content %}
+<div id="content">
+        <div class="login_wrap">
+    {% if error %}
+        <div class="error">{{ error.message }}</div>
+    {% endif %}
+ 
+    <form id='loginfrm' action="{{ path('_security_check') }}" method="POST">
+        <table>
+            <tr>
+                <td>
+                    <label for="username">Username:</label>
+                </td>
+                <td>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password:</label>
+                </td>
+                <td>
+                    <input type="password" id="password" name="_password" />
+                </td>
+            </tr>
+            <!--<tr>
+            	<td colspan="2">
+            		Remember Me <input type="checkbox" id="remember_me" name="_remember_me" checked />
+            	</td>
+            </tr>-->
+        </table>
+        <input type="submit" class="login" name="login" value="submit" />
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends '::base.html.twig' %}{% block title %}
+    Add User
+{% endblock %}
+{% block content %}
+
+<div id="page-heading"><h1>Add user</h1></div>
+<!-- end page-heading -->
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" id="content-table">
+		{% include "AdminBundle::tableStart.html.twig" %}
+		
+		{% include "AdminBundle::tableEnd.html.twig" %}
+	</table>
+	<div class="clear">&nbsp;</div>
+
+
+
+<form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} novalidate="disable">
+
+
+	{{ form_errors(form) }}
+    {#{ form_widget(form) }#}
+    <div>
+    	<div class="error">{{ form_errors(form.username) }}</div>
+    	{{ form_label(form.username) }}
+    	
+    	{{ form_widget(form.username) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.email) }}</div>
+    	{{ form_label(form.email) }}
+    	
+    	{{ form_widget(form.email) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.name) }}</div>
+    	{{ form_label(form.name) }}
+    	
+    	{{ form_widget(form.name) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.password) }}</div>
+    	{{ form_label(form.password.Password) }}
+    	
+    	{{ form_widget(form.password.Password) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.password.Confirm_Password) }}</div>
+    	{{ form_label(form.password.Confirm_Password) }}
+    	
+    	{{ form_widget(form.password.Confirm_Password) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.address1) }}</div>
+    	{{ form_label(form.address1) }}
+    	
+    	{{ form_widget(form.address1) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.address2) }}</div>
+    	{{ form_label(form.address2) }}
+    	
+    	{{ form_widget(form.address2) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.country) }}</div>
+    	{{ form_label(form.country) }}
+    	
+    	{{ form_widget(form.country) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.state) }}</div>
+    	{{ form_label(form.state) }}
+    	
+    	{{ form_widget(form.state) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(form.city) }}</div>
+    	{{ form_label(form.city) }}
+    	
+    	{{ form_widget(form.city) }}
+	</div>
+	
+	{% if app.session.get('role_name') == 'ROLE_STAFF' %}
+	<div>
+		<div class="error">{{ form_errors(form.clientPayment.paymentMode) }}</div>
+    	{{ form_label(form.clientPayment.paymentMode) }}
+    	
+    	{{ form_widget(form.clientPayment.paymentMode) }}
+	</div>
+    <div>
+    	<div class="error">{{ form_errors(form.clientPayment.amountReceived) }}</div>
+    	{{ form_label(form.clientPayment.amountReceived) }}
+    	
+    	{{ form_widget(form.clientPayment.amountReceived) }}
+	</div>
+	<div>
+    	<div class="error">{{ form_errors(form.clientPayment.dueAmount) }}</div>
+    	{{ form_label(form.clientPayment.dueAmount) }}
+    	
+    	{{ form_widget(form.clientPayment.dueAmount) }}
+	</div>
+	<div>
+    	<div class="error">{{ form_errors(form.clientPayment.totalAmount) }}</div>
+    	{{ form_label(form.clientPayment.totalAmount) }}
+    	
+    	{{ form_widget(form.clientPayment.totalAmount) }}
+	</div>
+	{% endif %}
+    <p>
+    	{{ form_rest(form) }}
+        <button type="submit">Create</button>
+    </p>
+    
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('user') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

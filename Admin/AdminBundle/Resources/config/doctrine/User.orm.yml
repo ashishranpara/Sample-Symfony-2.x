@@ -1,0 +1,98 @@
+Admin\AdminBundle\Entity\User:
+  type: entity
+  table: user
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    username:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    password:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    email:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+    name:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    address1:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    address2:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    country:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    state:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    city:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    availibilityStatus:
+      type: string
+      length: null
+      fixed: false
+      nullable: false
+      column: availibility_status
+    status:
+      type: string
+      length: null
+      fixed: false
+      nullable: false
+    subscribe:
+      type: string
+      length: null
+      fixed: false
+      nullable: false
+    createdDate:
+      type: datetime
+      nullable: false
+      column: created_date
+    updatedDate:
+      type: datetime
+      nullable: false
+      column: updated_date
+  manyToMany:
+    role:
+      targetEntity: Role
+      cascade: {  }
+      mappedBy: null
+      inversedBy: user
+      joinTable:
+        name: user_role
+        joinColumns:
+          -
+            name: user_id
+            referencedColumnName: id
+        inverseJoinColumns:
+          -
+            name: role_id
+            referencedColumnName: id
+      orderBy: null
+  lifecycleCallbacks: {  }

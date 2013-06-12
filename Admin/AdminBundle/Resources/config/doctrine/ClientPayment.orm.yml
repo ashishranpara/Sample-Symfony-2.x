@@ -1,0 +1,47 @@
+Admin\AdminBundle\Entity\ClientPayment:
+  type: entity
+  table: client_payment
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    paymentMode:
+      type: string
+      length: null
+      fixed: false
+      nullable: true
+      column: payment_mode
+    amountReceived:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: amount_received
+    dueAmount:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: due_amount
+    totalAmount:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: total_amount
+    createdDate:
+      type: datetime
+      nullable: true
+      column: created_date
+  manyToOne:
+    user:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        user_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

@@ -1,0 +1,26 @@
+AdminBundle_clientpayment:
+        resource: "@AdminBundle/Resources/config/routing/clientpayment.yml"
+        prefix:   /clientpayment
+        
+_security_login:
+    pattern:  /login
+    defaults: { _controller: AdminBundle:Security:login }
+
+_security_check:
+    pattern:  /login_check
+
+_security_logout:
+    pattern:  /logout
+
+admin_home:
+    pattern:  /admin/
+    defaults: { _controller: AdminBundle:Admin:index }
+    
+AdminBundle_homepage:
+    pattern:  /dashboard
+    defaults: { _controller: AdminBundle:Default:index }
+
+changePassword:
+    pattern:  /change-password
+    defaults: { _controller: AdminBundle:Default:changepassword }
+    

@@ -1,0 +1,40 @@
+user:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:User:index" }
+
+user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:User:show" }
+
+user_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:User:new" }
+
+user_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:User:create" }
+    requirements: { _method: post }
+
+user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:User:edit" }
+
+user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:User:update" }
+    requirements: { _method: post }
+
+user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:User:delete" }
+    requirements: { _method: post|get }
+    
+user_delete_link:
+    pattern:  /{id}/delete-staff
+    defaults: { _controller: "AdminBundle:User:deleteLink" }
+    requirements: { _method: post|get }
+    
+changestatus:
+    pattern:  /change-status
+    defaults: { _controller: "AdminBundle:User:changeStatus" }
+    requirements: { _method: post }

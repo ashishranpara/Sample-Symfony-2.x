@@ -1,0 +1,30 @@
+clientpayment:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:ClientPayment:index" }
+
+clientpayment_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:ClientPayment:show" }
+
+clientpayment_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:ClientPayment:new" }
+
+clientpayment_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:ClientPayment:create" }
+    requirements: { _method: post }
+
+clientpayment_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:ClientPayment:edit" }
+
+clientpayment_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:ClientPayment:update" }
+    requirements: { _method: post }
+
+clientpayment_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:ClientPayment:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,26 @@
+<?php
+
+namespace Admin\AdminBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
+
+class ClientPaymentType extends AbstractType
+{
+    public function buildForm(FormBuilder $builder, array $options)
+    {
+        $builder
+            ->add('paymentMode')
+            ->add('amountReceived')
+            ->add('dueAmount')
+            ->add('totalAmount')
+            ->add('createdDate')
+            ->add('user')
+        ;
+    }
+
+    public function getName()
+    {
+        return 'admin_adminbundle_clientpaymenttype';
+    }
+}

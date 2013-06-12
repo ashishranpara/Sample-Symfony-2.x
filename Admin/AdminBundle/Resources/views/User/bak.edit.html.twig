@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}{% block title %}
+    User
+{% endblock %}
+{% block content %}
+<h1>User edit</h1>
+
+<form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} novalidate="disable">
+    {#{ form_widget(edit_form) }#}
+    {{ form_errors(edit_form) }}
+    {#{ form_widget(form) }#}
+    <div>
+    	<div class="error">{{ form_errors(edit_form.username) }}</div>
+    	{{ form_label(edit_form.username) }}
+    	
+    	{{ form_widget(edit_form.username) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.email) }}</div>
+    	{{ form_label(edit_form.email) }}
+    	
+    	{{ form_widget(edit_form.email) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.name) }}</div>
+    	{{ form_label(edit_form.name) }}
+    	
+    	{{ form_widget(edit_form.name) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.address1) }}</div>
+    	{{ form_label(edit_form.address1) }}
+    	
+    	{{ form_widget(edit_form.address1) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.address2) }}</div>
+    	{{ form_label(edit_form.address2) }}
+    	
+    	{{ form_widget(edit_form.address2) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.country) }}</div>
+    	{{ form_label(edit_form.country) }}
+    	
+    	{{ form_widget(edit_form.country) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.state) }}</div>
+    	{{ form_label(edit_form.state) }}
+    	
+    	{{ form_widget(edit_form.state) }}
+	</div>
+	<div>
+		<div class="error">{{ form_errors(edit_form.city) }}</div>
+    	{{ form_label(edit_form.city) }}
+    	
+    	{{ form_widget(edit_form.city) }}
+	</div>
+	{% if app.session.get('role_name') == 'ROLE_STAFF' and is_payment_form == true %}
+	<div>
+		<div class="error">{{ form_errors(edit_form.clientPayment.paymentMode) }}</div>
+    	{{ form_label(edit_form.clientPayment.paymentMode) }}
+    	
+    	{{ form_widget(edit_form.clientPayment.paymentMode) }}
+	</div>
+    <div>
+    	<div class="error">{{ form_errors(edit_form.clientPayment.amountReceived) }}</div>
+    	{{ form_label(edit_form.clientPayment.amountReceived) }}
+    	
+    	{{ form_widget(edit_form.clientPayment.amountReceived) }}
+	</div>
+	<div>
+    	<div class="error">{{ form_errors(edit_form.clientPayment.dueAmount) }}</div>
+    	{{ form_label(edit_form.clientPayment.dueAmount) }}
+    	
+    	{{ form_widget(edit_form.clientPayment.dueAmount) }}
+	</div>
+	<div>
+    	<div class="error">{{ form_errors(edit_form.clientPayment.totalAmount) }}</div>
+    	{{ form_label(edit_form.clientPayment.totalAmount) }}
+    	
+    	{{ form_widget(edit_form.clientPayment.totalAmount) }}
+	</div>
+	{% endif %}
+    <p>
+    	{{ form_rest(edit_form) }}
+         <button type="submit">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('user') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+Admin\AdminBundle\Entity\Role:
+  type: entity
+  table: role
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    title:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+  manyToMany:
+    user:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: role
+      inversedBy: null
+      joinTable: null
+      orderBy: null
+  lifecycleCallbacks: {  }

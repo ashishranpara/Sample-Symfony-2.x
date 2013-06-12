@@ -1,0 +1,36 @@
+Admin\AdminBundle\Entity\User:
+    constraints:
+        - \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: "User already exists with same username, Please enter different username ! "
+            groups: [new_user]
+        - \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: "User already exists with same email. Please enter different email ! "
+            groups: [new_user]
+    properties:
+        username:
+            - NotBlank: { message: "user name can not be empty!", groups: [new_user] }
+            - MinLength: { limit: 6, message: Minimum length of 6 characters required!, groups: [new_user] }
+        password:
+            - NotBlank: { message: "password can not be empty!", groups: [change_password, new_user] }
+            - MinLength: { limit: 6, message: Minimum length of 6 characters required!, groups: [change_password, new_user] }
+        email:
+            - NotBlank: { message: "Please enter your email address", groups: [new_user]}
+            - Email: { message: "Please enter a valid email address", groups: [new_user] }
+            
+Admin\AdminBundle\Entity\ClientPayment:
+    properties:
+        paymentMode:
+            - NotBlank: { message: "Please enter payment method", groups: [new_user] }
+        amountReceived:
+            - NotBlank: { message: "Please enter amount received", groups: [new_user] }
+            - Type:
+                type: integer
+                message: "ssss".
+        dueAmount:
+            - NotBlank: { message: "Please enter due amount", groups: [new_user] }
+            - Type:
+                type: string
+                message: "ssss".
+            

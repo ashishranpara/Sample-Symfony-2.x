@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Libalaw &raquo; Admin{% endblock %}</title>
+        {% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}" type="text/css" media="screen" />
+        {% endblock %}
+        
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-1.4.2.min.js') }}" type="text/javascript" charset="utf-8"></script>
+            <script src="{{ asset('js/common.js') }}" type="text/javascript" charset="utf-8"></script>
+        {% endblock %}
+        <!--<link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />-->
+    </head>
+    <body>
+        {% block body %}
+		<section id="mainSec">
+  			<div id="main">
+    			<header>
+      				<div id="header">
+        				<div class="header_left">
+          				<h1 id="title"></h1>
+        				</div>
+        				<div class="header_right">
+          					<div class="loginbox" id="type1">
+          						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            					<ul>
+              						<li class="username">Welcome {{ app.user.username }}!</li>
+              						<li><a href="{{ path("_security_logout") }}">Log Out</a></li>
+              						<li><a href="{{ path('changePassword') }}">Change Password</a></li>
+            					</ul>
+            					{% endif %}
+            					<div class="corner topLeft"></div>
+            					<div class="corner topRight"></div>
+          					</div>
+        				</div>
+      				</div>
+      				<nav>
+      					<div id="mainMenu">
+        					<ul id="nav">
+          						<li id="dashboard"><a href="{{ path('AdminBundle_homepage') }}">Dashboard</a></li>
+          						<li id="support"><a href="{{ path('admin_home') }}">Home</a></li>
+          						<li id="support"><a href="{{ path('user') }}">Manage Staff</a></li>
+        					</ul>
+        				</div>
+      				</nav>
+    			</header>
+    			<section id="secContent">
+      				<div id="content">
+        				{% block content %}No content.{% endblock %}
+					</div>            
+    			</section>
+			</div>
+		</section>
+        <footer>
+			<div id="footer">
+			</div>
+		</footer>
+		{% endblock %}
+    </body>
+</html>

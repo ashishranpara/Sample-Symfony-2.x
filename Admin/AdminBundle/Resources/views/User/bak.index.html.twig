@@ -1,0 +1,101 @@
+{% extends '::base.html.twig' %}{% block title %}
+    User
+{% endblock %}
+{% block content %}
+
+	<!--  start page-heading -->
+	<div id="page-heading">
+		<h1>User</h1>
+	</div>
+	<!-- end page-heading -->
+	
+	
+
+<table class="records_list" border="1">
+    <thead>
+        <tr>
+        	<th><input class="check_all" type="checkbox" name="check_all" id="check_all" value="chk_all" /></th>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Availibity Status</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <form action="{{ path('changestatus') }}" method="post">
+    {% for entity in pager.getResults %}
+        <tr>
+        	<td><input class="checkbox" type="checkbox" name="check_boxes[]" id="check_{{ entity.id }}" value="{{ entity.id }}" /></td>
+            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.username }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.name }}</td>
+            <td>{{ entity.role.values[0] is defined ?  entity.role.values[0].title : '' }}</td>
+            <td>{{ entity.availibilityStatus }}</td>
+            <td>{{ entity.status }}</td>
+            <td>
+                <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a> | 
+                <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a> |
+                <a onclick="return confirm('Are you sure ?');" href="{{ path('user_delete_link', { 'id': entity.id }) }}">delete</a>
+            </td>
+        </tr>
+    {% else %}
+    
+    {% endfor %}
+    	<tr>
+    		<td>
+		    	<select class="status_select" name="status_code" id="status_code" onchange="changeStatus(this.form, this.value);">
+		    	<option value="">Change Status</option>
+				<option value="1">Active</option>
+				<option value="0">Inactive</option>
+				</select>
+			</td>
+		</tr>
+    </tbody>
+</table>
+</form>
+{% if pager.isPaginable %}
+   {{ paginate(pager, 'user') }}
+{% endif %}
+
+<ul>
+    <li>
+        <a href="{{ path('user_new') }}">
+        	{% if app.session.get('role_name') == 'ROLE_STAFF' %}
+            	Create new Client
+            {% elseif app.session.get('role_name') == 'ROLE_ADMIN' %}
+            	Create new Staff
+            {% else %}
+            	Create a new entry
+            {% endif %}
+        </a>
+    </li>
+</ul>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+	
+		// add multiple select / deselect functionality
+		$(".check_all").click(function () {
+			  $('.checkbox').attr('checked', this.checked);
+		});
+	
+		// if all checkbox are selected, check the selectall checkbox
+		// and viceversa
+		$(".checkbox").click(function(){
+	
+			if($(".checkbox").length == $(".checkbox:checked").length) {
+				$(".check_all").attr("checked", "checked");
+			} else {
+				$(".check_all").removeAttr("checked");
+			}
+	
+		});
+	});
+</script>
+
+{% endblock %}

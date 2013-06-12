@@ -1,0 +1,24 @@
+Admin\AdminBundle\Entity\Blog:
+  type: entity
+  table: blog
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    title:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+    content:
+      type: text
+      nullable: false
+    amount:
+      type: integer
+      unsigned: false
+      nullable: false
+  lifecycleCallbacks: {  }

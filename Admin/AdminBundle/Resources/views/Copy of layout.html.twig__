@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+	
+    <div id="container">
+        <header class="clearfix">
+            <h1>
+                liba law
+            </h1>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				Welcome {{ app.user.username }}!
+			{% endif %}
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('AdminBundle_homepage') }}">
+                                Dashboard
+						</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_home') }}">
+                                Home
+						</a>
+                    </li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="{{ path('_security_logout') }}">
+                                Logout
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+	</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
